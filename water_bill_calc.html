@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Bill Splitter</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+        }
+
+        .container {
+            width: 400px;
+            padding: 20px;
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            background-color: #333;
+            color: #fff;
+            border: 1px solid #555;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            margin-top: 20px;
+            display: none;
+        }
+
+        h1, h2, p {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="color: #4caf50;">Water Bill Splitter</h1>
+        <label for="totalAmount">Enter Total Bill Amount (in Rupees):</label>
+        <input type="number" id="totalAmount" placeholder="Enter total amount" style="margin-bottom: 10px;">
+        
+        <label for="additionalAmount">Enter Additional Amount (in Rupees):</label>
+        <input type="number" id="additionalAmount" placeholder="Enter additional amount">
+
+        <button onclick="calculateSplit()" style="margin-top: 10px;">Calculate Split</button>
+
+        <div id="result">
+            <h2>Amount to be paid by each family:</h2>
+            <p><strong>Abhi Family:</strong> <span id="abhiAmount"></span> Rupees</p>
+            <p><strong>Manjunath Family:</strong> <span id="manjunathAmount"></span> Rupees</p>
+            <p><strong>Akash Family:</strong> <span id="akashAmount"></span> Rupees</p>
+        </div>
+    </div>
+
+    <script>
+        function calculateSplit() {
+            const totalAmount = parseFloat(document.getElementById('totalAmount').value);
+            const additionalAmount = parseFloat(document.getElementById('additionalAmount').value) || 0;
+
+            if (isNaN(totalAmount) || totalAmount <= 0) {
+                alert('Please enter a valid positive number for the total amount.');
+                return;
+            }
+
+            const updatedTotal = totalAmount + additionalAmount;
+
+            const abhiShare = updatedTotal * 0.3;
+            const manjunathShare = updatedTotal * 0.5;
+            const akashShare = updatedTotal * 0.2;
+
+            document.getElementById('abhiAmount').textContent = abhiShare.toFixed(2);
+            document.getElementById('manjunathAmount').textContent = manjunathShare.toFixed(2);
+            document.getElementById('akashAmount').textContent = akashShare.toFixed(2);
+
+            document.getElementById('result').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
